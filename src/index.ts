@@ -15,7 +15,7 @@ export { default as LongTextField } from './LongTextField';
 // export { default as NestField } from './NestField';
 export { default as NumField } from './NumField';
 export { default as QuickForm } from './QuickForm';
-// export { default as RadioField } from './RadioField';
+export { default as RadioField } from './RadioField';
 // export { default as SelectField } from './SelectField';
 export { default as SubmitField } from './SubmitField';
 export { default as TextField } from './TextField';
