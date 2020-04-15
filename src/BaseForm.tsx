@@ -1,4 +1,3 @@
-import React from 'react';
 import { BaseForm } from 'uniforms';
 
 function Ionic(parent: any): any {
