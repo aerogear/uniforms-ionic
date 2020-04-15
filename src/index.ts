@@ -12,7 +12,7 @@ export { default as HiddenField } from './HiddenField';
 // export { default as ListField } from './ListField';
 // export { default as ListItemField } from './ListItemField';
 export { default as LongTextField } from './LongTextField';
-// export { default as NestField } from './NestField';
+export { default as NestField } from './NestField';
 export { default as NumField } from './NumField';
 export { default as QuickForm } from './QuickForm';
 export { default as RadioField } from './RadioField';
