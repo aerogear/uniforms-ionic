@@ -3,7 +3,7 @@
 // export { default as AutoForm } from './AutoForm';
 // export { default as BaseForm } from './BaseForm';
 export { default as BoolField } from './BoolField';
-// export { default as DateField } from './DateField';
+export { default as DateField } from './DateField';
 // export { default as ErrorField } from './ErrorField';
 // export { default as ErrorsField } from './ErrorsField';
 // export { default as HiddenField } from './HiddenField';
@@ -18,6 +18,6 @@ export { default as BoolField } from './BoolField';
 // export { default as RadioField } from './RadioField';
 // export { default as SelectField } from './SelectField';
 // export { default as SubmitField } from './SubmitField';
-// export { default as TextField } from './TextField';
+export { default as TextField } from './TextField';
 // export { default as ValidatedForm } from './ValidatedForm';
 // export { default as ValidatedQuickForm } from './ValidatedQuickForm';
