@@ -1,11 +1,11 @@
-import React, { Ref } from 'react';
-import { IonInput } from '@ionic/react';
+import React, { Ref, useState } from 'react';
+import { IonDatetime } from '@ionic/react';
 import { connectField } from 'uniforms/es5';
 
 import wrapField from './wrapField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = value => value && value.toISOString().slice(0, -8);
+const dateFormat = value => value && value.toISOString();
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
@@ -23,17 +23,19 @@ export type DateFieldProps = {
   disabled: boolean;
   error?: boolean;
   placeholder?: string;
-} & HTMLIonInputElement;
+} & HTMLIonDatetimeElement;
 
 function Date(props: DateFieldProps) {
 
+  const [date, setDate] = useState<string>((dateFormat(props.value) ?? ''));
   const onChange = (event) => {
+    setDate(event.target.detail);
     props.disabled || dateParse(event.target.valueAsNumber, props.onChange)
   }
 
   return wrapField(
     props,
-    <IonInput
+    <IonDatetime
       disabled={props.disabled}
       id={props.id}
       max={dateFormat(props.max)}
@@ -42,8 +44,7 @@ function Date(props: DateFieldProps) {
       onIonChange={onChange}
       placeholder={props.placeholder}
       // ref={props.inputRef}
-      type="date"
-      value={dateFormat(props.value) ?? ''}
+      value={date}
     />,
   );
 }
