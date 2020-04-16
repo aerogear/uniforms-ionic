@@ -11,12 +11,13 @@
     "moduleResolution": "node",
     "noImplicitAny": false,
     "paths": {
-      "uniforms": ["/node_modules/uniforms/es5"],
+      "uniforms": ["node_modules/uniforms/es5"],
+      "uniforms/*": ["node_modules/uniforms/es5/*"],
     },
     "strict": true
   },
   "exclude": [
-    // "node_modules",
+    "node_modules",
     "dist",
     "example",
     "examples",
