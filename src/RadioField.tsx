@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonRadio, IonListHeader, IonLabel, IonItem, IonRadioGroup } from '@ionic/react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms/es5';
 
 export type RadioFieldProps = {
   transform?: (string?: string) => string;

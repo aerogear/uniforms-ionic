@@ -1,4 +1,4 @@
-import { BaseForm } from 'uniforms';
+import { BaseForm } from 'uniforms/es5';
 
 function Ionic(parent: any): any {
   class _ extends parent {

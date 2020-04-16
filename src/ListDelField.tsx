@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
 import { removeOutline } from 'ionicons/icons';
-import { useField, filterDOMProps, joinName } from 'uniforms';
+import { useField, filterDOMProps, joinName } from 'uniforms/es5';
 
 export type ListDelFieldProps<T> = {
   name: string;

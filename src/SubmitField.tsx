@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonButton } from '@ionic/react';
-import { useForm, filterDOMProps } from 'uniforms';
+import { useForm, filterDOMProps } from 'uniforms/es5';
 
 export type SubmitFieldProps = {
   inputRef: undefined;

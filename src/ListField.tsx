@@ -1,6 +1,6 @@
 import React, { Children, HTMLProps, ReactNode } from 'react';
 import { IonToolbar, IonItem, IonLabel } from '@ionic/react';
-import { connectField, filterDOMProps, joinName } from 'uniforms';
+import { connectField, filterDOMProps, joinName } from 'uniforms/es5';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';

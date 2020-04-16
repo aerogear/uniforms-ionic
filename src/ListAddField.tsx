@@ -2,7 +2,7 @@ import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import { IonButton, IonIcon } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
-import { useField, filterDOMProps, joinName } from 'uniforms';
+import { useField, filterDOMProps, joinName } from 'uniforms/es5';
 
 export type ListAddFieldProps<T> = {
   initialCount?: number;

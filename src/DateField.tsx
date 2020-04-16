@@ -1,6 +1,6 @@
 import React, { Ref } from 'react';
 import { IonInput } from '@ionic/react';
-import { connectField } from 'uniforms';
+import { connectField } from 'uniforms/es5';
 
 import wrapField from './wrapField';
 
