@@ -10,19 +10,21 @@
     "jsx": "react",
     "moduleResolution": "node",
     "noImplicitAny": false,
+    "allowJs": true,
     "paths": {
-      "uniforms": ["node_modules/uniforms/es5"],
-      "uniforms/*": ["node_modules/uniforms/es5/*"],
+      "uniforms": ["node_modules/uniforms/src/"]
     },
     "strict": true
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
-    "node_modules",
+    // "node_modules",
     "dist",
     "example",
     "examples",
     "__tests__",
-    "__mocks__",
-    "__dep",
-  ]	  
+    "__mocks__"
+  ]
 }
