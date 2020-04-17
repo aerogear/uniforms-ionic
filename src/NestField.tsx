@@ -13,28 +13,17 @@ export type NestFieldProps = {
   name: string;
 } & HTMLProps<HTMLDivElement>;
 
-const Nest = ({
-  children,
-  error,
-  errorMessage,
-  fields,
-  itemProps,
-  label,
-  name,
-  showInlineError,
-  ...props
-}: NestFieldProps) => {
-
+function Nest(props: NestFieldProps) {
   return (
     // @ts-ignore
     <IonItem
       {...filterDOMProps(props)}
     >
-      {label && <IonLabel>{label}</IonLabel>}
-      {children
-        ? injectName(name, children)
-        : fields?.map(key => (
-            <AutoField key={key} name={joinName(name, key)} {...itemProps} />
+      {props.label && <IonLabel>{props.label}</IonLabel>}
+      {props.children
+        ? injectName(props.name, props.children)
+        : props.fields?.map(key => (
+            <AutoField key={key} name={joinName(props.name, key)} {...props.itemProps} />
           ))}
     </IonItem>
   );

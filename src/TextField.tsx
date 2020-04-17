@@ -15,8 +15,8 @@ export type TextFieldProps = {
   error?: boolean;
 } & HTMLIonInputElement;
 
-const Text = (props: TextFieldProps) =>
-  wrapField(
+function Text(props: TextFieldProps) {
+  return wrapField(
     props,
     <IonInput
       id={props.id}
@@ -30,5 +30,6 @@ const Text = (props: TextFieldProps) =>
       value={props.value ?? ''}
     />,
   );
+}
 
 export default connectField(Text);

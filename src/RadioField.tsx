@@ -12,7 +12,7 @@ export type RadioFieldProps = {
   checked: boolean;
 } & HTMLIonRadioElement;
 
-const Radio = (props: RadioFieldProps) => {
+function Radio(props: RadioFieldProps) {
   filterDOMProps.register('checkboxes', 'decimal', 'translate');
   // @ts-ignore
   return <IonRadioGroup {...filterDOMProps(props)} >

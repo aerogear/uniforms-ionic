@@ -15,7 +15,7 @@ export type NumFieldProps = {
   placeholder?: string;
 } & HTMLIonInputElement;
 
-const Num = (props: NumFieldProps) => {
+function Num(props: NumFieldProps) {
 
   const onChange = (event) => {
     const parse = props.decimal ? parseFloat : parseInt;

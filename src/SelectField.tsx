@@ -127,9 +127,6 @@ function RenderSelect(props: SelectInputProps) {
         multiple={props.fieldType === Array}
         name={props.name}
         placeholder={props.placeholder}
-        // isExpanded={expanded}
-        // selections={selected}
-        // onToggle={() => setExpanded(!expanded) }
         onIonChange={handleSelect}
         value={selected}
       >

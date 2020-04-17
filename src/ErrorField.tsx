@@ -6,8 +6,8 @@ export type ErrorFieldProps = {
   errorMessage?: string;
 } & HTMLProps<HTMLDivElement>;
 
-const Error = ({ children, error, errorMessage, ...props }: ErrorFieldProps) =>
-  !error ? null : (
+function Error({ children, error, errorMessage, ...props }: ErrorFieldProps) {
+  return !error ? null : (
     <div {...filterDOMProps(props)}>
       {children ? (
         children
@@ -16,6 +16,7 @@ const Error = ({ children, error, errorMessage, ...props }: ErrorFieldProps) =>
       )}
     </div>
   );
+}
 
 Error.defaultProps = {
   style: {

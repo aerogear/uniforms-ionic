@@ -8,26 +8,20 @@ export type SubmitFieldProps = {
   disabled: boolean;
 } & HTMLButtonElement;
 
-function SubmitField({
-  disabled,
-  inputRef,
-  value,
-  ...props
-}: SubmitFieldProps) {
+function SubmitField(props: SubmitFieldProps) {
   const { error, state } = useForm();
-
   return (
     // @ts-ignore
     <div {...filterDOMProps(props)}>
       <IonButton
         disabled={
-          disabled === undefined ? !!(error || state.disabled) : disabled
+          props.disabled === undefined ? !!(error || state.disabled) : props.disabled
         }
         type="submit"
-        ref={inputRef}
+        ref={props.inputRef}
         color="primary"
       >
-        {value}
+        {props.value}
       </IonButton>
     </div>
   )

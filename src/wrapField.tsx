@@ -13,10 +13,7 @@ type WrapperProps = {
   showInlineError?: boolean;
 };
 
-export default function wrapField(
-  props: WrapperProps,
-  children
-) {
+function wrapField(props: WrapperProps, children) {
   return (
     <IonItem {...filterDOMProps(props)}>
       <IonLabel>{props.label}</IonLabel>
@@ -24,3 +21,5 @@ export default function wrapField(
     </IonItem>
   );
 }
+
+export default wrapField;

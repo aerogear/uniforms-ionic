@@ -12,8 +12,8 @@ export type LongTextFieldProps = {
   placeholder?: string;
 } & HTMLIonTextareaElement;
 
-const LongText = (props: LongTextFieldProps) => (
-  wrapField(
+function LongText(props: LongTextFieldProps){
+  return wrapField(
     props,
     <IonTextarea
       id={props.id}
@@ -26,7 +26,7 @@ const LongText = (props: LongTextFieldProps) => (
       ref={props.inputRef}
       value={props.value ?? ''}
     />
-  )
-);
+  );
+}
 
 export default connectField<LongTextFieldProps>(LongText);
