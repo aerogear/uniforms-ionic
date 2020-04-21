@@ -14,6 +14,7 @@ function SubmitField(props: SubmitFieldProps) {
     // @ts-ignore
     <div {...filterDOMProps(props)}>
       <IonButton
+        style={{ margin: '10px 5px' }}
         disabled={
           props.disabled === undefined ? !!(error || state.disabled) : props.disabled
         }
