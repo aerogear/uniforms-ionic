@@ -100,7 +100,7 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
   act(() => wrapper
     .find(IonDatetime)
     // @ts-ignore
-    .prop('onIonChange')({ target: { value: now, valueAsNumber: now } })
+    .prop('onIonChange')({ detail: { value: now, valueAsNumber: now } })
   );
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
@@ -118,7 +118,7 @@ test('<DateField> - renders a input which correctly reacts on change (empty)', (
   act(() => wrapper
     .find(IonDatetime)
     // @ts-ignore
-    .prop('onIonChange')({ target: { value: undefined, valueAsNumber: undefined } })
+    .prop('onIonChange')({ detail: { value: undefined, valueAsNumber: undefined } })
   );
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
@@ -137,7 +137,7 @@ test('<DateField> - renders a input which correctly reacts on change (overflow)'
   act(() => wrapper
     .find(IonDatetime)
     // @ts-ignore
-    .prop('onIonChange')({ target: { value: now, valueAsNumber: now } })
+    .prop('onIonChange')({ detail: { value: now, valueAsNumber: now } })
   );
   expect(onChange).not.toHaveBeenCalled();
 });
