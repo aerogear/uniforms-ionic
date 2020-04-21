@@ -25,12 +25,12 @@ export type DateFieldProps = {
   placeholder?: string;
 } & HTMLIonDatetimeElement;
 
-function Date(props: DateFieldProps) {
+function DateField(props: DateFieldProps) {
 
   const [date, setDate] = useState<string>((dateFormat(props.value) ?? ''));
   const onChange = (event) => {
-    setDate(event.target.detail);
-    props.disabled || dateParse(event.target.valueAsNumber, props.onChange)
+    setDate(event.detail.value);
+    props.disabled || dateParse(event.detail.value, props.onChange)
   }
 
   return wrapField(
@@ -49,4 +49,4 @@ function Date(props: DateFieldProps) {
   );
 }
 
-export default connectField(Date);
+export default connectField(DateField);
