@@ -20,7 +20,7 @@ function Bool(props: BoolFieldProps) {
       id={props.id}
       name={props.name}
       // @ts-ignore
-      onIonChange={(event) => props.onChange(event?.target.value)}
+      onIonChange={(event) => props.onChange(event?.detail.checked)}
     />
   );
 };

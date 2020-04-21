@@ -99,8 +99,24 @@ test('<BoolField> - renders a input which correctly reacts on change', () => {
   const input = wrapper.find(IonCheckbox);
   expect(input).toHaveLength(1);
   // @ts-ignore
-  wrapper.find(IonCheckbox).prop('onIonChange')({ target: { value: true }});
+  wrapper.find(IonCheckbox).prop('onIonChange')({ detail: { checked: true }});
   expect(onChange).toHaveBeenLastCalledWith('x', true);
+});
+
+test('<BoolField> - renders a input which correctly reacts on change', () => {
+  const onChange = jest.fn();
+
+  const element = <BoolField name="x" value={true} />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Boolean } }, { onChange }),
+  );
+
+  const input = wrapper.find(IonCheckbox);
+  expect(input).toHaveLength(1);
+  // @ts-ignore
+  wrapper.find(IonCheckbox).prop('onIonChange')({ detail: { checked: false }});
+  expect(onChange).toHaveBeenLastCalledWith('x', false);
 });
 
 test('<BoolField> - renders a wrapper with unknown props', () => {
