@@ -30,22 +30,22 @@ export default function AutoField(originalProps: AutoFieldProps) {
       }
     } else {
       switch (fieldType) {
-        case Array:
+        case (Array || 'Array'):
           component = ListField;
           break;
-        case Boolean:
+        case (Boolean || 'Boolean'):
           component = BoolField;
           break;
-        case Date:
+        case (Date || 'Date'):
           component = DateField;
           break;
-        case Number:
+        case (Number || 'Number'):
           component = NumField;
           break;
-        case Object:
+        case (Object || 'Object'):
           component = NestField;
           break;
-        case String:
+        case (String || 'String'):
           component = TextField;
           break;
       }
