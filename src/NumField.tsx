@@ -10,6 +10,7 @@ export type NumFieldProps = {
   inputRef?: Ref<HTMLInputElement>;
   onChange: (value?: number) => void;
   disabled: boolean;
+  readonly?: boolean;
   value?: number;
   error?: boolean;
   placeholder?: string;
@@ -29,6 +30,7 @@ function Num(props: NumFieldProps) {
     <IonInput
       name={props.name}
       disabled={props.disabled}
+      readonly={props.readonly}
       id={props.id}
       max={props.max}
       min={props.min}

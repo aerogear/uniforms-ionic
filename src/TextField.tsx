@@ -12,6 +12,7 @@ export type TextFieldProps = {
   value?: string;
   placeholder?: string;
   disabled: boolean;
+  readonly?: boolean;
   error?: boolean;
 } & HTMLIonInputElement;
 
@@ -22,6 +23,7 @@ function Text(props: TextFieldProps) {
       id={props.id}
       name={props.name}
       disabled={props.disabled}
+      readonly={props.readonly}
       // @ts-ignore
       onIonChange={(event) => props.onChange(event.target.value)}
       placeholder={props.placeholder}

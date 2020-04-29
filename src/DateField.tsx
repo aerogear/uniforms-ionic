@@ -21,6 +21,7 @@ export type DateFieldProps = {
   onChange: (value?: string) => void;
   value?: string;
   disabled: boolean;
+  readonly?: boolean;
   error?: boolean;
   placeholder?: string;
 } & HTMLIonDatetimeElement;
@@ -43,6 +44,7 @@ function DateField(props: DateFieldProps) {
       name={props.name}
       onIonChange={onChange}
       placeholder={props.placeholder}
+      readonly={props.readonly}
       // ref={props.inputRef}
       value={date}
     />,

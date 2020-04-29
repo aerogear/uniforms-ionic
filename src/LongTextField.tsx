@@ -10,6 +10,7 @@ export type LongTextFieldProps = {
   value?: string;
   prefix?: string;
   placeholder?: string;
+  readonly?: boolean;
 } & HTMLIonTextareaElement;
 
 function LongText(props: LongTextFieldProps){
@@ -18,6 +19,7 @@ function LongText(props: LongTextFieldProps){
     <IonTextarea
       id={props.id}
       disabled={props.disabled}
+      readonly={props.readonly}
       name={props.name}
       aria-label={props.name}
       // @ts-ignore
