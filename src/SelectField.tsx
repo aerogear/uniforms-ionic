@@ -111,20 +111,13 @@ function RenderSelect(props: SelectInputProps) {
     </IonSelectOption>
   ));
 
-  if (props.placeholder) selectedOptions.unshift(
-    <IonSelectOption
-      key={props.allowedValues!.length}
-      disabled
-      value={props.placeholder}
-    />
-  );
   return (
     wrapField(
       props,
       <IonSelect
         disabled={props.disabled}
         id={props.id}
-        multiple={props.fieldType === Array}
+        multiple={(props.fieldType === Array) || props.multiple}
         name={props.name}
         placeholder={props.placeholder}
         onIonChange={handleSelect}

@@ -10,15 +10,11 @@
     "jsx": "react",
     "moduleResolution": "node",
     "noImplicitAny": false,
-    "allowJs": true,
     "paths": {
       "uniforms": ["node_modules/uniforms/src/"]
     },
     "strict": true
   },
-  "include": [
-    "src"
-  ],
   "exclude": [
     "node_modules",
     "dist",
