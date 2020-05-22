@@ -34,8 +34,7 @@ function ListDel<T>(rawProps: ListDelFieldProps<T>) {
       style={{ paddingLeft: '0', paddingRight: '0'}}
       onClick={() => {
         if (limitNotReached) {
-          const value = parentValue.slice();
-          value.splice(fieldIndex, 1);
+          const value = parentValue.splice(0, parentValue.length - 1);
           parent.onChange(value);
         }
       }}
