@@ -70,5 +70,5 @@ test('<ListDelField> - correctly reacts on click', () => {
   );
 
   expect(wrapper.find(IonButton).simulate('click')).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith(['x', 'z']);
+  expect(onChange).toHaveBeenLastCalledWith(['x', 'y']);
 });

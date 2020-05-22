@@ -1,5 +1,5 @@
 import React, { Children, HTMLProps, ReactNode } from 'react';
-import { IonToolbar, IonItem, IonLabel } from '@ionic/react';
+import { IonItem, IonLabel, IonInput } from '@ionic/react';
 import { connectField, filterDOMProps, joinName } from 'uniforms/es5';
 
 import ListItemField from './ListItemField';
@@ -41,20 +41,17 @@ function ListField<T>({
 }: ListFieldProps<T>) {
   return (
     <div {...filterDOMProps(props)}>
-      <IonToolbar>
-        <IonItem>
-          {label && (
-            <IonLabel>
-              {label}
-            </IonLabel>
-          )}
-        </IonItem>
-        <IonItem />
-        <IonItem>
-          <ListAddField name={`${name}.$`} initialCount={initialCount} />{' '}
-          <ListDelField name={`${name}.$`} />
-        </IonItem>
-      </IonToolbar>
+      <IonItem style={{ padding: 0 }}>
+        {label && (
+          <IonLabel>
+            {label}
+          </IonLabel>
+        )}
+        {/* Visual hack for padding */}
+        <IonInput disabled />
+        <ListAddField name={`${name}.$`} initialCount={initialCount} />{' '}
+        <ListDelField name={`${name}.$`} />
+      </IonItem>
 
       <div>
         {children
@@ -83,6 +80,11 @@ function ListField<T>({
   );
 }
 
-export default connectField<ListFieldProps<any>>(ListField, {
+ListField.defaultProps = {
+  value: []
+}
+
+// @ts-ignore
+export default connectField(ListField, {
   includeInChain: false,
 });
