@@ -86,25 +86,6 @@ type SelectInputProps = {
 
 function RenderSelect(props: SelectInputProps) {
 
-  const selectDefault = props.fieldType === Array ? [] : props.value;
-
-  const [selected, setSelected] = useState<string | string[]>(selectDefault);
-
-  const handleSelect = (event) => {
-    const items = parseInput(event.target.value, props.fieldType);
-    props.onChange(items);
-    setSelected(items);
-  }
-
-  const parseInput = (selection, fieldType) => {
-    if (fieldType !== Array) return (selection !== '') ? selection : '';
-    return (selected.includes(selection))
-      // @ts-ignore
-      ? selected.filter(s => s !== selection)
-      // @ts-ignore
-      : [selection, ...selected];
-  }
-
   const selectedOptions = props.allowedValues!.map(value => (
     <IonSelectOption key={value} value={value}>
       {props.transform ? props.transform(value) : value}
@@ -117,11 +98,11 @@ function RenderSelect(props: SelectInputProps) {
       <IonSelect
         disabled={props.disabled}
         id={props.id}
-        multiple={(props.fieldType === Array) || props.multiple}
+        multiple={(props.fieldType === Array)}
         name={props.name}
         placeholder={props.placeholder}
-        onIonChange={handleSelect}
-        value={selected}
+        onIonChange={(event) => props.onChange(event.detail.value)}
+        value={props.value}
       >
         { selectedOptions }
       </IonSelect>
