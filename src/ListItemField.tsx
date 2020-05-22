@@ -1,6 +1,5 @@
 import React, { Children, ReactNode } from 'react';
-import { joinName } from 'uniforms/es5';
-import { IonItem } from '@ionic/react';
+import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 
@@ -14,7 +13,7 @@ export type ListItemFieldProps = {
 
 export default function ListItemField(props: ListItemFieldProps) {
   return (
-    <IonItem style={{ marginBottom: '1rem'}}>
+    <div>
       {props.children ? (
         Children.map(props.children as JSX.Element, child =>
           React.cloneElement(child, {
@@ -25,6 +24,6 @@ export default function ListItemField(props: ListItemFieldProps) {
       ) : (
         <AutoField {...props} />
       )}
-    </IonItem>
+    </div>
   );
 }
