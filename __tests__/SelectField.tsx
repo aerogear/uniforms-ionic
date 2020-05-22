@@ -91,18 +91,6 @@ test('<SelectField> - renders a select with correct options (transform)', () => 
   expect(wrapper.find(IonSelect).prop('children')[1].props.children).toBe('B');
 });
 
-test('<SelectField> - renders a select with correct placeholder (implicit)', () => {
-  const element = <SelectField name="x" placeholder="y" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
-
-  expect(wrapper.find(IonSelect)).toHaveLength(1);
-  expect(wrapper.find(IonSelect).prop('placeholder')).toBe('y');
-  expect(wrapper.find(IonSelect).prop('value')).toBe(undefined);
-});
-
 test('<SelectField> - renders a select with correct value (default)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
@@ -151,7 +139,7 @@ test('<SelectField> - renders a select which correctly reacts on change', () => 
   );
 
   act(() => {
-    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ target: { value: 'b' } });
+    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ detail: { value: 'b' } });
     expect(changeEvent).toBeFalsy();
   })
 
@@ -175,12 +163,12 @@ test('<SelectField> - renders a select which correctly reacts on change (array)'
   );
   
   act(() => {
-    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ target: { value: 'b' } });
+    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ detail: { value: 'b' } });
     expect(changeEvent).toBeFalsy();
   });
 
   expect(wrapper.find(IonSelect)).toHaveLength(1);
-  expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
+  expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
 test('<SelectField> - renders a select which correctly reacts on change (empty)', () => {
@@ -196,7 +184,7 @@ test('<SelectField> - renders a select which correctly reacts on change (empty)'
   );
 
   act(() => {
-    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ target: { value: '' }});
+    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ detail: { value: '' }});
     expect(changeEvent).toBeFalsy();
   });
 
@@ -217,7 +205,7 @@ test('<SelectField> - renders a select which correctly reacts on change (same va
   );
 
   act(() => {
-    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ target: { value: 'b' } });
+    const changeEvent = wrapper.find(IonSelect).prop('onIonChange')({ detail: { value: 'b' } });
     expect(changeEvent).toBeFalsy();
   });
 

@@ -10,10 +10,10 @@
   "scripts": {
     "build": "tsc --build --incremental",
     "clean": "rimraf dist coverage tsconfig.tsbuildinfo && tsc",
-    "coverage": "jest --coverage",
+    "coverage": "jest --coverage --runInBand",
     "lint": "eslint --ext js,ts,tsx src",
     "reset": "rimraf dist node_modules",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
