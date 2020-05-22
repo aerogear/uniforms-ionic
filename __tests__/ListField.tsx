@@ -60,7 +60,7 @@ test('<ListField> - renders correct numer of items with initialCount (specified)
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find(IonInput)).toHaveLength(3);
+  expect(wrapper.find(IonInput)).toHaveLength(4);
 });
 
 test('<ListField> - passes itemProps to its children', () => {
