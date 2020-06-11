@@ -10,6 +10,7 @@ export type RadioFieldProps = {
   disabled: boolean;
   label?: string;
   checked: boolean;
+  required: boolean;
 } & HTMLIonRadioElement;
 
 function Radio(props: RadioFieldProps) {
@@ -18,7 +19,9 @@ function Radio(props: RadioFieldProps) {
   return <IonRadioGroup {...filterDOMProps(props)} >
     {props.label && 
       <IonListHeader>
-        <IonLabel>{props.label}</IonLabel>
+        <IonLabel>
+          {props.required ? `${props.label}*`: props.label}
+        </IonLabel>
       </IonListHeader>
     }
     {props.allowedValues.map(item => (
