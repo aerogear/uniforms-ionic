@@ -7,11 +7,7 @@ import wrapField from './wrapField';
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value) => {
   if(value){
-    if(typeof value === "string"){
-      return value;
-    } else if(value.toISOString){
-      value && value.toISOString();
-    } 
+   return new Date(value).toISOString();   
   }
   
   return undefined
