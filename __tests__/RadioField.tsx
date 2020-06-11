@@ -273,7 +273,7 @@ test('<RadioField> - renders a label', () => {
       .find(IonLabel)
       .at(0)
       .text(),
-  ).toBe('y');
+  ).toBe('y*');
 });
 
 test('<RadioField> - renders a wrapper with unknown props', () => {

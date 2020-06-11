@@ -30,6 +30,7 @@ type CheckboxesProps = {
   disabled?: boolean;
   label?: string;
   placeholder?: string;
+  required: boolean;
 } & (HTMLIonRadioElement | HTMLIonCheckboxElement);
 
 filterDOMProps.register('autoValue');
@@ -42,7 +43,9 @@ function RenderCheckboxes(props: CheckboxesProps) {
     <IonRadioGroup {...filterDOMProps(props)}>
       {props.label && 
         <IonListHeader>
-          <IonLabel>{props.label}</IonLabel>
+          <IonLabel>
+            {props.required ? `${props.label}*`: props.label}
+          </IonLabel>
         </IonListHeader>
       }
       {props.allowedValues!.map((item: any, index: number) => {

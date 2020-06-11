@@ -137,7 +137,7 @@ test('<TextField> - renders a label', () => {
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(IonLabel)).toHaveLength(1);
-  expect(wrapper.find(IonLabel).text()).toBe('y');
+  expect(wrapper.find(IonLabel).text()).toBe('y*');
 });
 
 test('<TextField> - renders a wrapper with unknown props', () => {

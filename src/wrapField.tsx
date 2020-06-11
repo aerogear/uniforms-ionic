@@ -11,12 +11,13 @@ type WrapperProps = {
   errorMessage?: string;
   help?: string;
   showInlineError?: boolean;
+  required?: boolean;
 };
 
 function wrapField(props: WrapperProps, children) {
   return (
     <IonItem {...filterDOMProps(props)}>
-      <IonLabel>{props.label}</IonLabel>
+      <IonLabel>{props.required ? `${props.label}*` : props.label}</IonLabel>
       {children}
     </IonItem>
   );
