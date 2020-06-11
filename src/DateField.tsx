@@ -5,7 +5,15 @@ import { connectField } from 'uniforms/es5';
 import wrapField from './wrapField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = value => value && value.toISOString();
+const dateFormat = (value) => {
+  if(typeof value === "string"){
+    return value;
+  } else if(value.toISOString){
+    value && value.toISOString();
+  } else {
+    return undefined;
+  }
+}
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
