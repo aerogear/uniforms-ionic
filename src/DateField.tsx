@@ -6,13 +6,15 @@ import wrapField from './wrapField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value) => {
-  if(typeof value === "string"){
-    return value;
-  } else if(value.toISOString){
-    value && value.toISOString();
-  } else {
-    return undefined;
+  if(value){
+    if(typeof value === "string"){
+      return value;
+    } else if(value.toISOString){
+      value && value.toISOString();
+    } 
   }
+  
+  return undefined
 }
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);
