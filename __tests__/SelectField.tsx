@@ -221,7 +221,7 @@ test('<SelectField> - renders a label', () => {
   );
 
   expect(wrapper.find(IonLabel)).toHaveLength(1);
-  expect(wrapper.find(IonLabel).text()).toBe('y');
+  expect(wrapper.find(IonLabel).text()).toBe('y*');
 });
 
 test('<SelectField> - renders a wrapper with unknown props', () => {
@@ -563,7 +563,7 @@ test('<SelectField checkboxes> - renders a label', () => {
       .find(IonLabel)
       .at(0)
       .text(),
-  ).toBe('y');
+  ).toBe('y*');
 });
 
 test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {

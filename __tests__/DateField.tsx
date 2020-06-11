@@ -50,7 +50,7 @@ test('<DateField> - renders a input with correct label (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(IonLabel)).toHaveLength(1);
-  expect(wrapper.find(IonLabel).text()).toBe('DateFieldLabel');
+  expect(wrapper.find(IonLabel).text()).toBe('DateFieldLabel*');
 });
 
 test('<DateField> - renders a input with correct value (default)', () => {

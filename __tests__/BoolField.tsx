@@ -57,7 +57,7 @@ test('<BoolField> - renders a input with correct label (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(IonLabel)).toHaveLength(1);
-  expect(wrapper.find(IonLabel).text()).toBe('BoolFieldLabel');
+  expect(wrapper.find(IonLabel).text()).toBe('BoolFieldLabel*');
 });
 
 test('<BoolField> - renders a input with correct value (default)', () => {

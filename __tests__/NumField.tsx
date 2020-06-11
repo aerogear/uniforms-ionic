@@ -235,7 +235,7 @@ test('<NumField> - renders a label', () => {
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find(IonLabel)).toHaveLength(1);
-  expect(wrapper.find(IonLabel).text()).toBe('y');
+  expect(wrapper.find(IonLabel).text()).toBe('y*');
 });
 
 test('<NumField> - renders a wrapper with unknown props', () => {
