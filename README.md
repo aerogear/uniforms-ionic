@@ -12,7 +12,8 @@ In this example, we will use the JSONSchema to describe our desired data format 
 
 ```shell
 npm install uniforms@3.0.0-alpha.4
-npm install uniforms-bridge-json-schema@3.0.0-alpha.4
+npm install uniforms-bridge-simple-schema2@3.0.0-alpha.4
+npm install simpl-schema
 npm install uniforms-ionic
 ```
 
@@ -24,115 +25,54 @@ have a read on [Semantic UI React's theme usage](https://react.semantic-ui.com/u
 After we've installed required packages, it's time to define our Guest schema. We can do it in a plain JSON, which is a valid JSONSchema instance:
 
 ```javascript
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    firstName: { type: 'string' },
-    lastName: { type: 'string' },
-    workExperience: {
-      description: 'Work experience in years',
-      type: 'integer',
-      minimum: 0,
-      maximum: 100
-    }
+import SimpleSchema from 'simpl-schema';
+
+const schema = new SimpleSchema({
+  name: {
+    type: String
   },
-  required: ['firstName', 'lastName']
-};
+  lastname: {
+    type: String
+  },
+  date: {
+    type: Date
+  }
+});
 ```
 
 ### 3. Then create the bridge
 
 Now that we have the schema, we can create the uniforms bridge of it, by using the corresponding uniforms schema-to-bridge package.
 Creating the bridge instance is necessary - without it, uniforms would not be able to process form generation and validation.
-As we are using the JSONSchema, we have to import the `uniforms-bridge-json-schema` package.
+As we are using the SimplSchema, we have to import the `uniforms-bridge-simple-schema2` package.
 
 ```js
-import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+
+...
+
+export default new SimpleSchema2Bridge(schema);
 ```
 
-Now you may think that we can simply do:
+Just to recap, the whole `schema.js` file looks like this:
 
 ```js
-// Wrong usage of the JSONSchemaBridge!
-// You have to pass a validator!
-const bridge = new JSONSchemaBridge(schema);
-```
+import SimpleSchema from 'simpl-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
-However, **there's small caveat with using the JSONSchemaBridge**.
-Because of its simplicity, JSONSchema doesn't provide any validation checkers, so in order to properly validate our submitted data,
-we need to **manually define a validator**, and that is required by the uniforms `JSONSchemaBrigde` constructor.
-
-To manually create the validator, we will use the [ajv](https://github.com/epoberezkin/ajv) package:
-
-```js
-import Ajv from 'ajv';
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
-function createValidator(schema) {
-  const validator = ajv.compile(schema);
-
-  return model => {
-    validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
-    }
-  };
-}
-
-const schemaValidator = createValidator(schema);
-```
-
-Now that we have both the schema and the validator, we can create the uniforms bridge:
-
-```js
-// Correct usage of the JSONSchemaBridge.
-const bridge = new JSONSchemaBridge(schema, schemaValidator);
-```
-
-Just to recap, the whole `GuestSchema.js` file looks like this:
-
-```js
-import Ajv from 'ajv';
-import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    firstName: { type: 'string' },
-    lastName: { type: 'string' },
-    workExperience: {
-      description: 'Work experience in years',
-      type: 'integer',
-      minimum: 0,
-      maximum: 100
-    }
+const schema = new SimpleSchema({
+  name: {
+    type: String
   },
-  required: ['firstName', 'lastName']
-};
+  lastname: {
+    type: String
+  },
+  date: {
+    type: Date
+  }
+});
 
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
-function createValidator(schema) {
-  const validator = ajv.compile(schema);
-
-  return model => {
-    validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
-    }
-  };
-}
-
-const schemaValidator = createValidator(schema);
-
-const bridge = new JSONSchemaBridge(schema, schemaValidator);
-
-export default bridge;
+export default new SimpleSchema2Bridge(schema);
 ```
 
 ### 4. Finally, use it in a form!
@@ -144,17 +84,13 @@ All we have to do now is to pass the previously created GuestSchema to the `Auto
 import React from 'react';
 import { AutoForm } from uniforms-semantic;
 
-import GuestSchema from './GuestSchema';
+import schema from './schema';
 
 export default function GuestForm() {
-  return <AutoForm schema={GuestSchema} onSubmit={console.log} />;
+  return <AutoForm schema={schema} onSubmit={console.log} />;
 }
 ```
 
 And that's it! `AutoForm` will generate a complete form with labeled fields, errors list (if any) and a submit button.
 
 Also, it will take care of validation and handle model changes.
-
-<TutorialForm>
-  <GuestFormBasic />
-</TutorialForm>
