@@ -1,18 +1,19 @@
-import React, { Ref, useState } from 'react';
+import React from 'react';
 import { IonDatetime } from '@ionic/react';
-import { connectField } from 'uniforms/es5';
+import { DatetimeChangeEventDetail } from '@ionic/core';
+import { connectField, FieldProps } from 'uniforms/es5';
 
 import wrapField from './wrapField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value) => {
+const dateFormat = (value?: string) => {
   if(value){
    return new Date(value).toISOString();   
   }
   
   return undefined
 }
-const dateParse = (timestamp, onChange) => {
+const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
     onChange(date);
@@ -21,24 +22,32 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-export type DateFieldProps = {
-  id: string;
-  // inputRef?: Ref<HTMLInputElement>;
-  onChange: (value?: string) => void;
-  value?: string;
-  disabled: boolean;
-  readonly?: boolean;
-  error?: boolean;
-  placeholder?: string;
-} & HTMLIonDatetimeElement;
+// export type DateFieldProps = {
+//   id: string; 
+//   onChange: (value?: Date) => void;
+//   value?: string;
+//   disabled: boolean;
+//   readonly?: boolean;
+//   error?: boolean;
+//   placeholder?: string;
+// } & HTMLIonDatetimeElement;
+export type DateFieldProps = FieldProps<
+  Date,
+  HTMLIonDatetimeElement,
+  {
+    inputRef: React.RefObject<HTMLInputElement>;
+    max?: string;
+    min?: string;
+    value?: string;
+    label?: string;
+    onChange: (value?: string) => void;
+  }
+>;
 
 function DateField(props: DateFieldProps) {
 
-  const [date, setDate] = useState<string>((dateFormat(props.value) ?? ''));
-  const onChange = (event) => {
-    setDate(event.detail.value);
-    props.disabled || dateParse(event.detail.value, props.onChange)
-  }
+  const onChange = (event: CustomEvent<DatetimeChangeEventDetail>) => props.disabled ||
+  dateParse((event.detail.value as any), props.onChange)
 
   return wrapField(
     props,
@@ -51,8 +60,7 @@ function DateField(props: DateFieldProps) {
       onIonChange={onChange}
       placeholder={props.placeholder}
       readonly={props.readonly}
-      // ref={props.inputRef}
-      value={date}
+      value={dateFormat(props.value) ?? ''}
     />,
   );
 }

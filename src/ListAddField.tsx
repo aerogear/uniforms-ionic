@@ -3,38 +3,42 @@ import cloneDeep from 'lodash/cloneDeep';
 import { IonButton, IonIcon } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
 import { useField, filterDOMProps, joinName } from 'uniforms/es5';
+import { IonicReactProps } from '@ionic/react/dist/types/components/IonicReactProps';
 
-export type ListAddFieldProps<T> = {
+export type ListAddFieldProps = {
   initialCount?: number;
   parent?: any;
   name: string;
   disabled?: boolean;
-  value?: T;
-};
+  value?: unknown;
+} & IonicReactProps;
 
-function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
-  const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const nameParts = joinName(null, props.name);
+function ListAdd({
+  disabled = false,
+  name,
+  value,
+  ...props
+}: ListAddFieldProps) {
+  const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
-  const parentValue = parent.value ?? [];
+  const parent = useField<{ maxCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true }
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.maxCount! <= parentValue.length);
+    !disabled && !(parent.maxCount! <= parent.value!.length);
 
   return (
-    // @ts-ignore
     <IonButton
       fill="clear"
       style={{ paddingLeft: '0', paddingRight: '0'}}
-      disabled={!limitNotReached || rawProps.disabled}
+      disabled={!limitNotReached || disabled}
       onClick={() => {
-        if (limitNotReached)
-          parent.onChange(parentValue.concat([cloneDeep(props.value!)]));
+        !disabled &&
+          limitNotReached &&
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
       {...filterDOMProps(props)}
     >
