@@ -13,6 +13,8 @@
     "coverage": "jest --coverage --runInBand",
     "lint": "eslint --ext js,ts,tsx src",
     "reset": "rimraf dist node_modules",
+    "release:validate": "./scripts/validateRelease.sh TAG=1.2.3",
+    "release:publish": "./scripts/publishRelease.sh",
     "test": "jest --runInBand"
   },
   "devDependencies": {
