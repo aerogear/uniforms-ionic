@@ -9,9 +9,10 @@
     "importHelpers": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
     "paths": {
-      "uniforms": ["node_modules/uniforms/src/"]
+      "uniforms": ["/node_modules/uniforms/es5"]
     },
     "strict": true
   },
@@ -21,6 +22,7 @@
     "example",
     "examples",
     "__tests__",
-    "__mocks__"
+    "__mocks__",
+    "__dep"
   ]
 }
