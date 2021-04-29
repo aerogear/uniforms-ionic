@@ -1,44 +1,61 @@
-import React, { Children, HTMLProps, ReactNode } from 'react';
+import React, { Children, cloneElement, HTMLProps, isValidElement, ReactNode } from 'react';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
-import { connectField, filterDOMProps, joinName } from 'uniforms/es5';
+import { connectField, filterDOMProps, HTMLFieldProps, joinName } from 'uniforms/es5';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 import { ListDelField } from '.';
 
-export type ListFieldProps<T> = {
-  value: T[];
-  children?: ReactNode;
-  addIcon?: any;
-  error?: boolean;
-  info?: boolean;
-  errorMessage?: string;
-  initialCount?: number;
-  itemProps?: {};
-  labelCol?: any;
-  label: string;
-  wrapperCol?: any;
-  name: string;
-  showInlineError?: boolean;
-} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
+// export type ListFieldProps<T> = {
+//   value: T[];
+//   children?: ReactNode;
+//   addIcon?: any;
+//   error?: boolean;
+//   info?: boolean;
+//   errorMessage?: string;
+//   initialCount?: number;
+//   itemProps?: {};
+//   labelCol?: any;
+//   label: string;
+//   wrapperCol?: any;
+//   name: string;
+//   showInlineError?: boolean;
+// } & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
+export type ListFieldProps = HTMLFieldProps<
+  unknown[],
+  HTMLDivElement,
+  {
+    children?: ReactNode;
+    info?: string;
+    error?: boolean;
+    initialCount?: number;
+    itemProps?: object;
+    showInlineError?: boolean;
+  }
+>;
 
-filterDOMProps.register('minCount');
+declare module 'uniforms' {
+  interface FilterDOMProps {
+    wrapperCol: never;
+    labelCol: never;
+  }
+}
 
-function ListField<T>({
-  children,
+filterDOMProps.register('minCount', 'wrapperCol', 'labelCol');
+
+function ListField({
+  children = <ListItemField name="$" />,
   error,
   errorMessage,
   info,
   initialCount,
   itemProps,
   label,
-  labelCol,
   name,
-  showInlineError,
   value,
-  wrapperCol,
+  showInlineError,
   ...props
-}: ListFieldProps<T>) {
+}: ListFieldProps) {
   return (
     <div {...filterDOMProps(props)}>
       <IonItem style={{ padding: 0 }}>
@@ -54,27 +71,17 @@ function ListField<T>({
       </IonItem>
 
       <div>
-        {children
-          ? value.map((item: any, index: number) =>
-              Children.map(children as JSX.Element, child =>
-                React.cloneElement(child, {
-                  key: index,
-                  label: '',
-                  name: joinName(
-                    name,
-                    child.props.name && child.props.name.replace('$', index),
-                  ),
-                }),
-              ),
-            )
-          : value.map((item: any, index: number) => (
-              <ListItemField
-                key={index}
-                label={null}
-                name={joinName(name, index)}
-                {...itemProps}
-              />
-            ))}
+      {value?.map((item, itemIndex) =>
+        Children.map(children, (child, childIndex) =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                key: `${itemIndex}-${childIndex}`,
+                name: child.props.name?.replace('$', '' + itemIndex),
+                ...itemProps  ,
+              })
+            : child
+        )
+      )}
       </div>
     </div>
   );
@@ -84,7 +91,4 @@ ListField.defaultProps = {
   value: []
 }
 
-// @ts-ignore
-export default connectField(ListField, {
-  includeInChain: false,
-});
+export default connectField(ListField);
