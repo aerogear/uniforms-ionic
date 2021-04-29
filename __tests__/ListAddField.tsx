@@ -4,11 +4,18 @@ import { IonButton } from '@ionic/react';
 
 import createContext from './_createContext';
 import mount from './_mount';
+import { merge } from 'lodash';
 
-const parent = {
-  maxCount: 3,
-  value: [],
-};
+const onChange = jest.fn();
+const context = (schema?: {}) =>
+  createContext(
+    merge({ x: { type: Array, maxCount: 3 }, 'x.$': String }, schema),
+    { onChange, model: { x: [] } },
+  );
+
+beforeEach(() => {
+  onChange.mockClear();
+});
 
 test('<ListAddField> - works', () => {
   const element = <ListAddField name="x.$" parent={parent} />;
@@ -58,20 +65,9 @@ test('<ListAddField> - prevents onClick when limit reached', () => {
 });
 
 test('<ListAddField> - correctly reacts on click', () => {
-  const onChange = jest.fn();
-
-  const element = (
-    <ListAddField
-      name="x.1"
-      parent={Object.assign({}, parent, { onChange })}
-      value="y"
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
-  );
+  const element = <ListAddField name="x.1" value="y" />;
+  const wrapper = mount(element, context());
 
   expect(wrapper.find(IonButton).simulate('click')).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith(['y']);
+  expect(onChange).toHaveBeenLastCalledWith('x', ['y']);
 });

@@ -114,13 +114,13 @@ test('<ListField> - renders children with correct name (children)', () => {
       .find(Child)
       .at(0)
       .prop('name'),
-  ).toBe('x.0');
+  ).toBe('0');
   expect(
     wrapper
       .find(Child)
       .at(1)
       .prop('name'),
-  ).toBe('x.1');
+  ).toBe('1');
 });
 
 test('<ListField> - renders children with correct name (value)', () => {
@@ -135,11 +135,11 @@ test('<ListField> - renders children with correct name (value)', () => {
       .find(ListItemField)
       .at(0)
       .prop('name'),
-  ).toBe('x.0');
+  ).toBe('0');
   expect(
     wrapper
       .find(ListItemField)
       .at(1)
       .prop('name'),
-  ).toBe('x.1');
+  ).toBe('1');
 });

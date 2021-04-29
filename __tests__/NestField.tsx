@@ -22,13 +22,13 @@ test('<NestField> - renders an <AutoField> for each field', () => {
       .find(AutoField)
       .at(0)
       .prop('name'),
-  ).toBe('x.a');
+  ).toBe('a');
   expect(
     wrapper
       .find(AutoField)
       .at(1)
       .prop('name'),
-  ).toBe('x.b');
+  ).toBe('b');
 });
 
 test('<NestField> - renders custom content if given', () => {
