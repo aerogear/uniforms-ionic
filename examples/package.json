@@ -11,11 +11,11 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "simpl-schema": "^1.5.7",
-    "uniforms": "v3.0.0-alpha.2",
-    "uniforms-bridge-graphql": "v3.0.0-alpha.2",
-    "uniforms-bridge-json-schema": "v3.0.0-alpha.2",
-    "uniforms-bridge-simple-schema": "v3.0.0-alpha.2",
-    "uniforms-bridge-simple-schema-2": "v3.0.0-alpha.2",
+    "uniforms": "v3.0.0",
+    "uniforms-bridge-graphql": "v3.0.0",
+    "uniforms-bridge-json-schema": "v3.0.0",
+    "uniforms-bridge-simple-schema": "v3.0.0",
+    "uniforms-bridge-simple-schema-2": "v3.0.0",
     "uniforms-ionic": "0.1.0"
   },
   "scripts": {
