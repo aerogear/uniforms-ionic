@@ -13,7 +13,7 @@ import { connectField, filterDOMProps } from 'uniforms/es5';
 
 import wrapField from './wrapField';
 
-const xor = (item, array) => {
+function xor<T>(item: T, array: T[]) {
   const index = array.indexOf(item);
   if (index === -1) {
     return array.concat([item]);

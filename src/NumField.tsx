@@ -1,5 +1,6 @@
 import React, { Ref } from 'react';
 import { IonInput } from '@ionic/react';
+import { InputChangeEventDetail } from '@ionic/core';
 import { connectField } from 'uniforms/es5';
 
 import wrapField from './wrapField';
@@ -18,10 +19,9 @@ export type NumFieldProps = {
 
 function Num(props: NumFieldProps) {
 
-  const onChange = (event) => {
+  const onChange = (event: CustomEvent<InputChangeEventDetail>) => {
     const parse = props.decimal ? parseFloat : parseInt;
-    const v = parse(event.target.value);
-    // @ts-ignore
+    const v = parse((event.target as any).value);
     props.onChange(isNaN(v) ? undefined : v);
   }
 
@@ -36,7 +36,6 @@ function Num(props: NumFieldProps) {
       min={props.min}
       onIonChange={onChange}
       placeholder={props.placeholder}
-      // ref={props.inputRef}
       step={props.decimal ? '0.01' : '1'}
       type="number"
       value={props.value ?? ''}

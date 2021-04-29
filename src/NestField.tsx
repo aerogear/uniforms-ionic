@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
-import { connectField, joinName, injectName, filterDOMProps } from 'uniforms/es5';
+import React, { HTMLProps, ReactPropTypes } from 'react';
+import { connectField, filterDOMProps } from 'uniforms/es5';
 import { IonItem, IonLabel } from '@ionic/react';
 
 import AutoField from './AutoField';
@@ -10,26 +10,42 @@ export type NestFieldProps = {
   fields?: any[];
   itemProps?: object;
   showInlineError?: boolean;
+  disabled?: boolean;
   name: string;
 } & HTMLProps<HTMLDivElement>;
 
-function Nest(props: NestFieldProps) {
+function Nest({
+  children,
+  error,
+  errorMessage,
+  fields,
+  itemProps,
+  label,
+  name,
+  showInlineError,
+  disabled,
+  ...props
+}: NestFieldProps) {
   return (
     // @ts-ignore
     <IonItem
       {...filterDOMProps(props)}
     >
-      {props.label && <IonLabel>{props.label}</IonLabel>}
-      {props.children
-        ? injectName(props.name, props.children)
-        : props.fields?.map(key => (
-            <AutoField key={key} name={joinName(props.name, key)} {...props.itemProps} />
-          ))}
+      {label && <IonLabel>{label}</IonLabel>}
+      {
+        children ||
+        fields?.map((field: string) => (
+          <AutoField
+            key={field}
+            name={field}
+            disabled={disabled}
+            {...itemProps}
+          />
+        ))
+      }
     </IonItem>
   );
   
 }
 
-export default connectField(Nest, {
-  includeInChain: false,
-});
+export default connectField(Nest);

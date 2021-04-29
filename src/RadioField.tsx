@@ -5,7 +5,7 @@ import { connectField, filterDOMProps } from 'uniforms/es5';
 export type RadioFieldProps = {
   transform?: (string?: string) => string;
   allowedValues: string[];
-  onChange: (string) => void;
+  onChange: (value: string) => void;
   value?: string;
   disabled: boolean;
   label?: string;
@@ -14,7 +14,7 @@ export type RadioFieldProps = {
 } & HTMLIonRadioElement;
 
 function Radio(props: RadioFieldProps) {
-  filterDOMProps.register('checkboxes', 'decimal', 'translate');
+  filterDOMProps.register('checkboxes', 'decimal');
   // @ts-ignore
   return <IonRadioGroup {...filterDOMProps(props)} >
     {props.label && 
@@ -33,7 +33,6 @@ function Radio(props: RadioFieldProps) {
           disabled={props.disabled}
           id={`${props.id}`}
           name={props.name}
-          // label={props.transform ? props.transform(item) : item}
           aria-label={props.name}
           onChange={() => props.onChange(item)}
         />
