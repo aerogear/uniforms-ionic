@@ -63,7 +63,7 @@
     "tslib": "1.11.1",
     "typescript": "3.8.3",
     "uniforms": "3.0.0",
-    "uniforms-bridge-simple-schema-2": "3.0.0"
+    "uniforms-bridge-simple-schema-2": "3.10.2"
   },
   "engines": {
     "npm": ">=5.0.0"
